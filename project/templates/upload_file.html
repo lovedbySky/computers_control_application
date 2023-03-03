@@ -1,0 +1,28 @@
+{% extends "layout.html" %}
+
+{% block uploadfile %}active{% endblock %}
+
+{% block content %}
+    <div class="container text-light d-flex" style="margin-left: 20%; margin-top: 5%">
+        <div style="margin-right: 5%">
+            <h1>File upload:</h1>
+            <div style="color: red;" class="pb-2">{{ get_flashed_messages()[0]|safe }}</div>
+            <form action = "" method = "POST" enctype = "multipart/form-data">
+                <input class="form-control bd-dark mb-3 mt-5" type="file" name="file" />
+                <input class="form-control bg-primary text-light" type ="submit" value="upload" />
+            </form>
+        </div>
+        <div  class="m-5 mt-0 mb-0">
+            {% if files %}
+                {% for file in files %}
+                    <div class="d-flex">
+                        <h5 class="m-3 mt-0 mb-3"><a href="/upload/file/download/{{ file }}">{{ file }}</a></h5>
+                        <a href="/remove/file/{{ file }}" type="button" class="btn-close btn-close-white"></a>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <h5 class="text-warning">No one files was upload</h5>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}

